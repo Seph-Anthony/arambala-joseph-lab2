@@ -9,8 +9,7 @@ session_start();
 // Usage example
 $user = new User();
 
-// checks if the button is clicked and the form is submitted. If true, run the createUser() function from our User class
-// Then pass in an array of data to the createUser class since createUser accepts an array of data
+
 if(isset($_POST['submit'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
@@ -19,19 +18,11 @@ if(isset($_POST['submit'])) {
         'username' => $username,
     ]);
 
-    echo "<pre>User Info from Database:\n";
-    print_r($user_info);
-    echo "</pre>";
+    
 
     if ($user_info && isset($user_info['password'])) {
-        echo "<pre>Password from Database (Length: " . strlen($user_info['password']) . "):\n";
-        echo $user_info['password'];
-        echo "\nPassword Entered (Length: " . strlen($password) . "):\n";
-        echo $password;
-        echo "\nPassword Verify Result:\n";
-        var_dump(password_verify($password, $user_info['password']));
-        echo "</pre>";
-
+        
+        
         if (password_verify($password, $user_info['password'])) {
             $_SESSION['user'] = $user_info;
             header('Location: blog.php'); // Redirect to blog.php after successful login
